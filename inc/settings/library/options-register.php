@@ -114,17 +114,17 @@ function sell_media_plugin_options_validate( $input ) {
             // Validate text input and textarea fields
             else if ( ( 'text' == $optiondetails['type'] || 'textarea' == $optiondetails['type'] || 'number' == $optiondetails['type'] ) ) {
                 // Validate no-HTML content
-                if ( 'nohtml' == $optiondetails['sanitize'] ) {
+                if ( isset($optiondetails['sanitize']) && 'nohtml' == $optiondetails['sanitize'] ) {
                     // Pass input data through the wp_filter_nohtml_kses filter
                     $valid_input[ $setting ] = wp_filter_nohtml_kses( $input[ $setting ] );
                 }
                 // Validate HTML content
-                if ( 'html' == $optiondetails['sanitize'] ) {
+                if ( isset($optiondetails['sanitize']) && 'html' == $optiondetails['sanitize'] ) {
                     // Pass input data through the wp_filter_kses filter
                     $valid_input[ $setting ] = addslashes( $input[ $setting ] );
                 }
                 // Validate Slug
-                if ( 'slug' == $optiondetails['sanitize'] ) {
+                if ( isset($optiondetails['sanitize']) && 'slug' == $optiondetails['sanitize'] ) {
                     $valid_input[ $setting ] = sanitize_title( $input[ $setting ] );
                 }
             }
