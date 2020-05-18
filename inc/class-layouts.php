@@ -333,6 +333,8 @@ class SellMediaLayouts {
 	function content_loop( $post_id, $i, $args = array() ) {
 		global $mime_type;
 		$original_id = $post_id;
+		if(!isset($args['context']))
+			$args['context'] = "";
 		if ( post_password_required( $original_id ) && sell_media_is_search() ) {
 			return;
 		}
@@ -349,7 +351,8 @@ class SellMediaLayouts {
 		}
 
 		$custom_style = '';
-		if ( isset( $this->settings->thumbnail_layout ) && 'sell-media-horizontal-masonry' === $this->settings->thumbnail_layout ) {
+		if ( isset( $this->settings->thumbnail_layout ) && 'sell-media-horizontal-masonry' === $this->settings->thumbnail_layout && "widget" != $args['context'] ) {
+
 			$class = 'horizontal-masonry-column overlay-container ';
 			// grab the thumbnail if its not photo
 			if ( SellMediaAudioVideo::is_video_item( $post_id ) || SellMediaAudioVideo::is_audio_item( $post_id ) || 'application/pdf' === $mime_type || 'application/zip' === $mime_type ) {
@@ -374,7 +377,7 @@ class SellMediaLayouts {
 		}
 		
 		$html .= '<a href="' . esc_url( get_permalink( $post_id ) ) . '" ' . sell_media_link_attributes( $post_id ) . ' class="sell-media-item">';
-		if ( isset( $this->settings->thumbnail_layout ) && 'sell-media-horizontal-masonry' === $this->settings->thumbnail_layout ) {
+		if ( isset( $this->settings->thumbnail_layout ) && 'sell-media-horizontal-masonry' === $this->settings->thumbnail_layout && "widget" != $args['context'] ) {
 			$html .= '<i style="padding-bottom:' . $padding_bottom . '%;" ></i>';
 		}
 
