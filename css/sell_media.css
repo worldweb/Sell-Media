@@ -376,7 +376,6 @@ body #sell-media-submit:disabled {
   border-color: #dbdbdb;
   box-shadow: none;
   opacity: .5;
-  color: #363636;
 }
 .sell-media-item-links {
   font-size: 11px;
